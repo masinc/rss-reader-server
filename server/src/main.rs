@@ -10,8 +10,8 @@ async fn main() -> io::Result<()> {
     let mut server = HttpServer::new(app);
     let mut listenfd = ListenFd::from_env();
 
-    server = if let Some(l) = listenfd.take_tcp_listener(0)? {
-        server.listen(l)?
+    server = if let Some(listener) = listenfd.take_tcp_listener(0)? {
+        server.listen(listener)?
     } else {
         server.bind("127.0.0.1:3000")?
     };
