@@ -4,5 +4,6 @@ mod root;
 use actix_web::web;
 
 pub fn config(cfg: &mut web::ServiceConfig) {
-    cfg.service(root::service()).service(api::service());
+    api::config(cfg);
+    root::config(cfg);
 }
