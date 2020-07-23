@@ -7,7 +7,7 @@ async fn head() -> impl Responder {
 }
 
 async fn get() -> impl Responder {
-    HttpResponse::Ok().body("GET feed")
+    HttpResponse::Ok().body("GET ".to_string() + PATH)
 }
 
 fn service() -> Resource {

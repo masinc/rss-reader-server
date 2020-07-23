@@ -2,8 +2,10 @@ mod v1;
 
 use actix_web::{web, HttpResponse, Resource, Responder};
 
+const PATH: &str = "/api";
+
 async fn get() -> impl Responder {
-    HttpResponse::Ok().body("body")
+    HttpResponse::Ok().body("GET ".to_string() + PATH)
 }
 
 async fn head() -> impl Responder {
@@ -11,7 +13,7 @@ async fn head() -> impl Responder {
 }
 
 fn service() -> Resource {
-    web::resource("/api")
+    web::resource(PATH)
         .route(web::get().to(get))
         .route(web::head().to(head))
 }
