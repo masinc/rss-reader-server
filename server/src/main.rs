@@ -1,14 +1,10 @@
-use actix_web::{web, App, HttpResponse, HttpServer, Responder};
-use std::io;
+mod routes;
 
-async fn index() -> impl Responder {
-    HttpResponse::Ok().body("rss-reader-server")
-}
+use actix_web::{App, HttpServer};
+use std::io;
 
 #[actix_rt::main]
 async fn main() -> io::Result<()> {
-    HttpServer::new(|| App::new().route("/", web::get().to(index)))
-        .bind("127.0.0.1:8080")?
-        .run()
-        .await
+    let app = || App::new().configure(routes::config);
+    HttpServer::new(app).bind("127.0.0.1:8080")?.run().await
 }
